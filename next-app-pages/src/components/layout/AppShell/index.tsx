@@ -5,7 +5,7 @@ type AppshellProps = {
     children: React.ReactNode;
 };
 
-const disabledNavbar = ["/auth/login", "/auth/register"];
+const disabledNavbar = ["/auth/login", "/auth/register", "/404"];
 
 export default function Appshell(props: AppshellProps) {
     const { children } = props;
