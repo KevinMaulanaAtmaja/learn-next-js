@@ -1,4 +1,4 @@
-import { retrieveData } from "@/lib/firebase/sevice";
+import { retrieveData } from "@/lib/firebase/service";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
