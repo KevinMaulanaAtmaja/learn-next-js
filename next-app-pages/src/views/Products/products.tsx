@@ -1,12 +1,5 @@
+import { ProductType } from "@/types/product.type";
 import styles from "./Products.module.scss";
-
-type ProductType = {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-    category: string;
-};
 
 export default function ProductView({ prods }: { prods: ProductType[] }) {
     return (

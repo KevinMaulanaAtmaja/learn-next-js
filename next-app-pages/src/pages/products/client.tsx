@@ -16,12 +16,12 @@ export default function ProductPage() {
     }, []);
 
     // useEffect(() => {
-    //     fetch("/api/product")
+    //     fetch("/api/products")
     //         .then((res) => res.json())
     //         .then((response) => setProducts(response.data));
     // }, []);
 
-    const { data, error, isLoading } = useSWR("/api/product", fetcher);
+    const { data, error, isLoading } = useSWR("/api/products", fetcher);
 
     return (
         <div>
