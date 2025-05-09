@@ -1,7 +1,7 @@
 {
-  "name": "next-app-pages-ori",
-  "version": "0.1.0",
-  "private": true,
+  "name": "next-app-pages",
+  "version": "1.0.0",
+  "description": "This is a ",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -26,5 +26,8 @@
     "postcss": "^8.5.3",
     "sass": "^1.87.0",
     "tailwindcss": "^4.1.5"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
