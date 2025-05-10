@@ -1,4 +1,4 @@
-import { retrieveData } from "@/lib/firebase/service";
+import { retrieveData, retrieveDataById } from "@/lib/firebase/service";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -29,6 +29,12 @@ type Data = {
 // ];
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-    const data = await retrieveData("products");
-    res.status(200).json({ status: true, statusCode: 200, data });
+    const id = req.query.products![1];
+    if (id) {
+        const data = await retrieveDataById("products", id);
+        res.status(200).json({ status: true, statusCode: 200, data });
+    } else {
+        const product = await retrieveData("products");
+        res.status(200).json({ status: true, statusCode: 200, data: product });
+    }
 }

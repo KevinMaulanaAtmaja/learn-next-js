@@ -1,5 +1,5 @@
 import { ProductType } from "@/types/product.type";
-import ProductView from "@/views/Products/products";
+import ProductView from "@/views/Products";
 
 export default function ProductServerPage(props: { products: ProductType[] }) {
     const { products } = props;

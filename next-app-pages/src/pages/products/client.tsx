@@ -1,4 +1,4 @@
-import ProductView from "@/views/Products/products";
+import ProductView from "@/views/Products";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { fetcher } from "@/lib/swr/fetcher";
