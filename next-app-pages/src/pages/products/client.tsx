@@ -6,14 +6,14 @@ import useSWR from "swr";
 
 export default function ProductPage() {
     const { push } = useRouter();
-    const [isLogin, setIsLogin] = useState(true);
+    // const [isLogin, setIsLogin] = useState(true);
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        if (!isLogin) {
-            push("/auth/login");
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!isLogin) {
+    //         push("/auth/login");
+    //     }
+    // }, []);
 
     // useEffect(() => {
     //     fetch("/api/products")
