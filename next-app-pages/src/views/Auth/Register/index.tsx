@@ -7,6 +7,7 @@ export default function RegisterView() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
     const { push } = useRouter();
+
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         setError("");

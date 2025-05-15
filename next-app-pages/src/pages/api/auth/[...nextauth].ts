@@ -1,5 +1,7 @@
+import { signIn } from "@/lib/firebase/service";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from "bcrypt";
 
 const authOptions: NextAuthOptions = {
     session: {
@@ -11,20 +13,22 @@ const authOptions: NextAuthOptions = {
             type: "credentials",
             name: "credentials",
             credentials: {
-                fullname: { label: "Fullname", type: "text" },
                 email: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                const { fullname, email, password } = credentials as {
-                    fullname: string;
+                const { email, password } = credentials as {
                     email: string;
                     password: string;
                 };
 
-                const user: any = { id: 1, fullname: fullname, email: email, password: password };
+                const user: any = await signIn({ email });
                 if (user) {
-                    return user;
+                    const passwordConfirme = await compare(password, user.password);
+                    if (passwordConfirme) {
+                        return user;
+                    }
+                    return null;
                 } else {
                     return null;
                 }
@@ -34,10 +38,9 @@ const authOptions: NextAuthOptions = {
     callbacks: {
         jwt({ token, account, profile, user }: any) {
             if (account?.provider === "credentials") {
-                token.email = user.email;
-            }
-            if (account?.provider === "credentials") {
                 token.fullname = user.fullname;
+                token.email = user.email;
+                token.role = user.role;
             }
             // console.log({ token, account, profile, user });
             return token;
@@ -50,9 +53,15 @@ const authOptions: NextAuthOptions = {
             if ("fullname" in token) {
                 session.user.fullname = token.fullname;
             }
+            if ("role" in token) {
+                session.user.role = token.role;
+            }
             // console.log({ session, token });
             return session;
         },
+    },
+    pages: {
+        signIn: "/auth/login",
     },
 };
 

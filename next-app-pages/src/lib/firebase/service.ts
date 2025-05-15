@@ -50,3 +50,20 @@ export async function signUp(
             .catch((error) => callback({ status: false, message: error }));
     }
 }
+
+export async function signIn(userData: { email: string }) {
+    const q = query(collection(firestore, "users"), where("email", "==", userData.email));
+    const snapshot = await getDocs(q);
+
+    const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    }));
+    // console.log(`data: ${data}`);
+
+    if (data) {
+        return data[0];
+    } else {
+        return null;
+    }
+}
