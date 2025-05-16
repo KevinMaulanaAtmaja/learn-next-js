@@ -6,9 +6,9 @@ export default function Navbar() {
     return (
         <div className={styles.navbar}>
             <h1>Navbar</h1>
-            <div>
-                {data && data.user.fullname}
-                {""}
+            <div className={styles.profile}>
+                {data?.user?.image && <img src={data.user.image} alt={data.user.fullname} className={styles.avatar} />}
+                {data && data?.user?.fullname}{" "}
                 {data ? (
                     <button className={styles.button} onClick={() => signOut()}>
                         Sign Out

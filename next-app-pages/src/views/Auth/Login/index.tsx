@@ -39,31 +39,49 @@ export default function LoginView() {
         <div className={styles.login}>
             <h1 className={styles.login__title}>Login</h1>
             {error && <p className={styles.login__error}>{error}</p>}
-            <form onSubmit={handleSubmit} className={styles.login__form}>
-                <div className={styles.login__form__item}>
-                    <label htmlFor="email" className={styles.login__form__item__label}>
-                        Email
-                    </label>
-                    <input type="email" id="email" name="email" placeholder="Email" className={styles.login__form__item__input} />
-                </div>
-                <div className={styles.login__form__item}>
-                    <label htmlFor="password" className={styles.login__form__item__label}>
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Password"
-                        className={styles.login__form__item__input}
-                    />
-                </div>
-                <button type="submit" className={styles.login__form__button} disabled={isLoading}>
-                    {isLoading ? "Loading..." : "Login"}
+            <div className={styles.login__form}>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.login__form__item}>
+                        <label htmlFor="email" className={styles.login__form__item__label}>
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            className={styles.login__form__item__input}
+                        />
+                    </div>
+                    <div className={styles.login__form__item}>
+                        <label htmlFor="password" className={styles.login__form__item__label}>
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Password"
+                            className={styles.login__form__item__input}
+                        />
+                    </div>
+                    <button type="submit" className={styles.login__form__button} disabled={isLoading}>
+                        {isLoading ? "Loading..." : "Login"}
+                    </button>
+                </form>
+                <button
+                    onClick={() => signIn("google", { callbackUrl: callbackUrlQuery, redirect: false })}
+                    className={styles.login__form__item__google}
+                >
+                    Sign In With Google
                 </button>
-            </form>
-            <p className={styles.login__link}>
-                Dont have an account? Sign Up <Link href="/auth/register">here</Link>
+            </div>
+            <p>
+                Don&apos;t have an account? Sign up
+                <Link href={"/auth/register"} className={styles.login__link}>
+                    {" "}
+                    here
+                </Link>
             </p>
         </div>
     );

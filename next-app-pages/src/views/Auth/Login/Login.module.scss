@@ -34,13 +34,17 @@
             display: flex;
             flex-direction: column;
             margin: 20px 0;
-
             &__input {
                 padding: 10px;
                 background-color: #eee;
                 margin-top: 5px;
                 border-radius: 5px;
                 border: 1px solid #ccc;
+            }
+            &__google {
+                width: 100%;
+                text-align: center;
+                margin-top: 20px;
             }
         }
         &__button {
@@ -51,9 +55,7 @@
         }
     }
     &__link {
-        a {
-            color: blue;
-            cursor: pointer;
-        }
+        color: blue;
+        cursor: pointer;
     }
 }
