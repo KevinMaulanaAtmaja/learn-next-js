@@ -1,6 +1,7 @@
 import { ProductType } from "@/types/product.type";
 import styles from "./Products.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProductView({ prods }: { prods: ProductType[] }) {
     return (
@@ -12,7 +13,8 @@ export default function ProductView({ prods }: { prods: ProductType[] }) {
                         {prods?.map((prod: ProductType) => (
                             <Link href={`/products/${prod.id}`} key={prod.id} className={styles.product__content__item}>
                                 <div className={styles.product__content__item__image}>
-                                    <img src={prod.image} alt={prod.name} />
+                                    {/* <img src={prod.image} alt={prod.name} /> */}
+                                    <Image src={prod.image} alt={prod.name} width={500} height={500} />
                                 </div>
                                 <h4 className={styles.product__content__item__name}>{prod.name}</h4>
                                 <p className={styles.product__content__item__category}>{prod.category}</p>
