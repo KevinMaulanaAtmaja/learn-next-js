@@ -5,9 +5,9 @@ import { fetcher } from "@/lib/swr/fetcher";
 import useSWR from "swr";
 
 export default function ProductPage() {
-    const { push } = useRouter();
+    // const { push } = useRouter();
     // const [isLogin, setIsLogin] = useState(true);
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
     // useEffect(() => {
     //     if (!isLogin) {
@@ -26,7 +26,7 @@ export default function ProductPage() {
     return (
         <div>
             {/* <ProductView prods={products} /> */}
-            <ProductView prods={isLoading ? [] : data.data} />
+            <ProductView prods={isLoading ? [] : data?.data} />
         </div>
     );
 }

@@ -9,6 +9,9 @@ export default function UserSettingPage() {
     return (
         <div>
             <h1>User Setting Page</h1>
+            <h1 id="title" data-testid="title">
+                Detail User:
+            </h1>
             <p>Name: {query.name}</p>
         </div>
     );

@@ -1,8 +1,8 @@
-import { fetcher } from "@/lib/swr/fetcher";
+// import { fetcher } from "@/lib/swr/fetcher";
 import { ProductType } from "@/types/product.type";
 import DetailProductView from "@/views/DetailProduct";
-import { useRouter } from "next/router";
-import useSWR from "swr";
+// import { useRouter } from "next/router";
+// import useSWR from "swr";
 
 export default function DetailProductPage({ product }: { product: ProductType }) {
     // client-side
