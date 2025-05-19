@@ -37,7 +37,7 @@ export async function signUp(
     }));
 
     if (data.length > 0) {
-        console.log(data);
+        // console.log(data);
         callback({ status: false, message: "Email already registered" });
     } else {
         userData.password = await bcrypt.hash(userData.password, 10);
@@ -71,7 +71,7 @@ export async function signIn(userData: { email: string }) {
 export async function signInWithGoogle(userData: any, callback: any) {
     const q = query(collection(firestore, "users"), where("email", "==", userData.email));
     const snapshot = await getDocs(q);
-    console.log(snapshot);
+    // console.log(snapshot);
 
     const data: any = snapshot.docs.map((doc) => ({
         id: doc.id,
