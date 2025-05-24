@@ -1,6 +1,17 @@
+"use client";
 import Link from "next/link";
 
 export default function LoginPage() {
+    const handleLogin = (e: any) => {
+        e.preventDefault();
+        fetch("/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify({
+                email: e.target.email.value,
+                password: e.target.password.value,
+            }),
+        });
+    };
     return (
         <div className="h-screen w-full flex justify-center items-center bg-gray-100 flex-col">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -13,7 +24,7 @@ export default function LoginPage() {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST">
+                <form className="space-y-6" onSubmit={(e) => handleLogin(e)} method="POST">
                     <div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                             Email address
