@@ -1,11 +1,8 @@
-type DetailProductPageProps = { params: { slug: string[] } };
+type ProductPageProps = { params: { slug: string[] } };
 
-// [slug] -> jdi cuma bisa 1 param
-// [...slug] -> jdi bisa bnyk param
-// [[...slug]] -> jdi opt param
 async function getData() {
     // const res = await fetch("https://fakestoreapi.com/products");
-    const res = await fetch("http://localhost:3000/api/product", { cache: "no-store" });
+    const res = await fetch("http://localhost:3000/api/products", { cache: "no-store" });
 
     if (!res.ok) {
         throw new Error("Failed to fetch data");
@@ -13,20 +10,15 @@ async function getData() {
     return res.json();
 }
 
-export default async function DetailProductPage(props: DetailProductPageProps) {
+export default async function ProductPage(props: ProductPageProps) {
     const { params } = props;
     const products = await getData();
 
     return (
         <>
-            {/* <h1>{params.slug ? "Detail Product Page" : "Product Page"}</h1>
-            {params.slug && (
-                <p>
-                    Merk: {params.slug[0]}, Seri: {params.slug[1]}, Tipe: {params.slug[2]}
-                </p>
-            )} */}
+            {/* <h1>{params.slug ? "Detail Product Page" : "Product Page"}</h1>*/}
+
             <div className="grid grid-cols-3 mt-5 place-items-center">
-                {/* {products.data.length > 0 && */}
                 {products.data.length > 0 &&
                     products.data.map((product: any) => (
                         <div
@@ -37,7 +29,7 @@ export default async function DetailProductPage(props: DetailProductPageProps) {
                                 <img
                                     className="p-8 rounded-t-lg object-cover w-full h-48"
                                     src={product.image}
-                                    alt="product image"
+                                    alt={product.title}
                                 />
                             </a>
                             <div className="px-5 pb-5">
@@ -59,6 +51,12 @@ export default async function DetailProductPage(props: DetailProductPageProps) {
                         </div>
                     ))}
             </div>
+
+            {params.slug && (
+                <p>
+                    Merk: {params.slug[0]}, Seri: {params.slug[1]}, Tipe: {params.slug[2]}
+                </p>
+            )}
         </>
     );
 }

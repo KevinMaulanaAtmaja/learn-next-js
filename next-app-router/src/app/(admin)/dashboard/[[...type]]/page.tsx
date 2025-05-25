@@ -1,5 +1,8 @@
 type TypePageProps = { params: { type: string[] } };
 
+// [slug] -> jdi cuma bisa 1 param
+// [...slug] -> jdi bisa bnyk param
+// [[...slug]] -> jdi opt param + bnyk param
 export default function TypePage(props: TypePageProps) {
     const { params } = props;
     return (
