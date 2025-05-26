@@ -13,6 +13,7 @@ const data = [
         price: 18000,
         image: "https://down-id.img.susercontent.com/file/id-11134207-7qula-ljl9u9h34gcv44.webp",
     },
+    
 ];
 
 export async function GET(request: NextRequest) {
