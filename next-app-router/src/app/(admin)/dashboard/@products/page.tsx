@@ -17,9 +17,9 @@ export default function AdminProductPage() {
     };
 
     return (
-        <div className="h-screen w-full flex justify-center items-center flex-col ">
+        <div className="h-96 w-3/6 mr-5 bg-cyan-600 rounded-[12px] flex justify-center items-center flex-col ">
             <h1>{status}</h1>
-            <button onClick={() => revalidate()} className=" text-black border border-black cursor-pointer rounded-md py-2 px-6">
+            <button onClick={() => revalidate()} className="bg-indigo-600 text-black border border-black cursor-pointer rounded-md py-2 px-6">
                 Revalidate
             </button>
         </div>

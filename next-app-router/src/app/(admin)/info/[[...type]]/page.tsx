@@ -7,7 +7,7 @@ export default function TypePage(props: TypePageProps) {
     const { params } = props;
     return (
         <div>
-            <h1>{params.type ? "Type Page" : "Dashboard"}</h1>
+            <h1>{params.type ? "Type Page" : "Info Page"}</h1>
             <p>
                 {params.type && (
                     <>
