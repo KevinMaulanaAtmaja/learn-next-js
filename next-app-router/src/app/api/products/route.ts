@@ -1,3 +1,4 @@
+import { retrieveData, retrieveDataById } from "@/lib/firebase/service";
 import { NextRequest, NextResponse } from "next/server";
 
 const data = [
@@ -13,7 +14,6 @@ const data = [
         price: 18000,
         image: "https://down-id.img.susercontent.com/file/id-11134207-7qula-ljl9u9h34gcv44.webp",
     },
-    
 ];
 
 export async function GET(request: NextRequest) {
@@ -22,12 +22,16 @@ export async function GET(request: NextRequest) {
     console.log(id);
 
     if (id) {
-        const detailProduct = data.find((item) => item.id == Number(id));
+        // const detailProduct = data.find((item) => item.id == Number(id));
+        const detailProduct = await retrieveDataById("products", id);
         if (detailProduct) {
             return NextResponse.json({ status: 200, message: "Success", data: detailProduct });
         }
         return NextResponse.json({ status: 404, message: "Not Found", data: {} });
     }
 
-    return NextResponse.json({ status: 200, message: "Success", data: data });
+    const products = await retrieveData("products");
+
+    // return NextResponse.json({ status: 200, message: "Success", data: data });
+    return NextResponse.json({ status: 200, message: "Success", data: products });
 }
