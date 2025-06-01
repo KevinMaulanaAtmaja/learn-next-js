@@ -1,9 +1,12 @@
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
     const pathName = usePathname();
     const router = useRouter();
+    const { status } = useSession();
+
     return (
         <nav className="flex bg-gray-800 py-2 px-5 justify-between">
             <div className="flex">
@@ -25,9 +28,18 @@ export default function Navbar() {
                 </ul>
             </div>
             <div>
-                <button className="bg-white rounded-md py-1 px-8" onClick={() => router.push("/login")}>
+                {/* <button className="bg-white rounded-md py-1 px-8" onClick={() => router.push("/login")}>
                     Login
-                </button>
+                </button> */}
+                {status === "authenticated" ? (
+                    <button className="bg-white rounded-md py-1 px-8" onClick={() => signOut()}>
+                        Logout
+                    </button>
+                ) : (
+                    <button className="bg-white rounded-md py-1 px-8" onClick={() => signIn()}>
+                        Login
+                    </button>
+                )}
             </div>
         </nav>
     );

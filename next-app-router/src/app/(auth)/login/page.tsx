@@ -1,16 +1,32 @@
 "use client";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-    const handleLogin = (e: any) => {
+    const { push } = useRouter();
+    const handleLogin = async (e: any) => {
         e.preventDefault();
-        fetch("/api/auth/login", {
-            method: "POST",
-            body: JSON.stringify({
+        try {
+            const res = await signIn("credentials", {
+                redirect: false,
                 email: e.target.email.value,
                 password: e.target.password.value,
-            }),
-        });
+                callbackUrl: "/dashboard",
+            });
+            if (!res?.error) {
+                push("/dashboard");
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        // fetch("/api/auth/login", {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         email: e.target.email.value,
+        //         password: e.target.password.value,
+        //     }),
+        // });
     };
     return (
         <div className="h-screen w-full flex justify-center items-center bg-gray-100 flex-col">
