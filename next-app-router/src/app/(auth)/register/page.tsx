@@ -1,6 +1,37 @@
+"use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function RegisterPage() {
+    const { push } = useRouter();
+    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        setError("");
+        setIsLoading(true);
+
+        const res = await fetch("/api/auth/register", {
+            method: "POST",
+            body: JSON.stringify({
+                fullname: e.target.fullname.value,
+                email: e.target.email.value,
+                password: e.target.password.value,
+            }),
+        });
+
+        if (res.status == 200) {
+            e.target.reset();
+            setIsLoading(false);
+            push("/login");
+        } else {
+            setIsLoading(false);
+            setError("Email already registered");
+        }
+    };
+
     return (
         <div className="h-screen w-full flex justify-center items-center bg-gray-100 flex-col">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -13,7 +44,8 @@ export default function RegisterPage() {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST">
+                {error !== "" && <p className="text-red-500 text-center">{error}</p>}
+                <form className="space-y-6" onSubmit={(e) => handleSubmit(e)} method="POST">
                     <div>
                         <label htmlFor="fullname" className="block text-sm/6 font-medium text-gray-900">
                             Fullname
@@ -69,7 +101,7 @@ export default function RegisterPage() {
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
-                            Sign up
+                            {isLoading ? "Loading..." : "Sign up"}
                         </button>
                     </div>
                 </form>
