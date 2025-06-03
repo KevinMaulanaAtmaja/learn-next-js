@@ -2,10 +2,16 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
     const { push } = useRouter();
+    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleLogin = async (e: any) => {
+        setError("");
+        setIsLoading(true);
         e.preventDefault();
         try {
             const res = await signIn("credentials", {
@@ -15,18 +21,18 @@ export default function LoginPage() {
                 callbackUrl: "/dashboard",
             });
             if (!res?.error) {
+                e.target.reset();
+                setIsLoading(false);
                 push("/dashboard");
+            } else {
+                setIsLoading(false);
+                if (res.status == 401) {
+                    setError("Email or password is incorect");
+                }
             }
         } catch (err) {
             console.log(err);
         }
-        // fetch("/api/auth/login", {
-        //     method: "POST",
-        //     body: JSON.stringify({
-        //         email: e.target.email.value,
-        //         password: e.target.password.value,
-        //     }),
-        // });
     };
     return (
         <div className="h-screen w-full flex justify-center items-center bg-gray-100 flex-col">
@@ -40,6 +46,7 @@ export default function LoginPage() {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                {error !== "" && <p className="text-red-500 text-center">{error}</p>}
                 <form className="space-y-6" onSubmit={(e) => handleLogin(e)} method="POST">
                     <div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
@@ -82,10 +89,11 @@ export default function LoginPage() {
 
                     <div>
                         <button
+                            disabled={isLoading}
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
-                            Sign in
+                            {isLoading ? "Loading..." : "Sign in"}
                         </button>
                     </div>
                 </form>
