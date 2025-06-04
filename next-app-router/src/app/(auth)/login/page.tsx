@@ -4,26 +4,29 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function LoginPage() {
+export default function LoginPage({ searchParams }: any) {
     const { push } = useRouter();
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    const callbackUrl = searchParams.callbackUrl || "/";
 
     const handleLogin = async (e: any) => {
         setError("");
         setIsLoading(true);
         e.preventDefault();
+
         try {
             const res = await signIn("credentials", {
                 redirect: false,
                 email: e.target.email.value,
                 password: e.target.password.value,
-                callbackUrl: "/dashboard",
+                callbackUrl: callbackUrl,
             });
             if (!res?.error) {
                 e.target.reset();
                 setIsLoading(false);
-                push("/dashboard");
+                push(callbackUrl);
             } else {
                 setIsLoading(false);
                 if (res.status == 401) {
