@@ -30,12 +30,12 @@ export default function Navbar() {
                 {status === "authenticated" ? (
                     <div className="flex">
                         <h4 className="text-white mr-5">{session?.user?.fullname}</h4>
-                        <button className="bg-white rounded-md py-1 px-8" onClick={() => signOut()}>
+                        <button className="bg-white hover:cursor-pointer rounded-md py-1 px-8" onClick={() => signOut()}>
                             Logout
                         </button>
                     </div>
                 ) : (
-                    <button className="bg-white rounded-md py-1 px-8" onClick={() => signIn()}>
+                    <button className="bg-white hover:cursor-pointer rounded-md py-1 px-8" onClick={() => signIn()}>
                         Login
                     </button>
                 )}

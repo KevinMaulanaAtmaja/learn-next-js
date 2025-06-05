@@ -94,9 +94,17 @@ export default function LoginPage({ searchParams }: any) {
                         <button
                             disabled={isLoading}
                             type="submit"
-                            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            className="flex w-full justify-center my-3 rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
                             {isLoading ? "Loading..." : "Sign in"}
+                        </button>
+                        <hr />
+                        <button
+                            type="button"
+                            onClick={() => signIn("google", { callbackUrl: callbackUrl, redirect: false })}
+                            className="flex w-full justify-center my-3 rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        >
+                            Login with Google
                         </button>
                     </div>
                 </form>
