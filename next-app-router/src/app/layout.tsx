@@ -1,12 +1,12 @@
 "use client";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Comic_Neue } from "next/font/google";
 import Navbar from "./navbar";
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppin = Comic_Neue({ subsets: ["latin"], weight: ["300", "400", "700"] });
 const disabledNavbar = ["/login", "/register"];
 const allowCount = ["/", "/about", "/about/profile"];
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={poppin.className}>
                 <SessionProvider>
                     {!disabledNavbar.includes(pathname) && <Navbar />}
                     <div className="mx-5">

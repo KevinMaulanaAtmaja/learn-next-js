@@ -1,4 +1,5 @@
 import { getData } from "@/services/products";
+import Image from "next/image";
 
 export default async function DetailProductPage(props: any) {
     const { params } = props;
@@ -7,7 +8,13 @@ export default async function DetailProductPage(props: any) {
     return (
         <div className="container mx-auto my-10">
             <div className="w-1/2 mx-auto border border-gray-700">
-                <img src={product.data.image} alt="" className="w-full object-cover aspect-square col-span-2" />
+                <Image
+                    src={product.data.image}
+                    alt=""
+                    className="w-full object-cover aspect-square col-span-2"
+                    width={500}
+                    height={500}
+                />
                 <div className="bg-white p-4 px-4">
                     <h3>{product.data.name}</h3>
                     <p>Price: ${product.data.price}</p>

@@ -1,4 +1,5 @@
 import { getData } from "@/services/products";
+import Image from "next/image";
 
 type ProductPageProps = { params: { slug: string[] } };
 
@@ -20,10 +21,12 @@ export default async function ProductPage(props: ProductPageProps) {
                             className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 my-5"
                         >
                             <a href="#">
-                                <img
+                                <Image
                                     className="p-8 rounded-t-lg object-cover w-full h-48"
                                     src={product.image}
                                     alt={product.title}
+                                    width={200}
+                                    height={200}
                                 />
                             </a>
                             <div className="px-5 pb-5">
