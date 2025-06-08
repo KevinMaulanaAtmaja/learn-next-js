@@ -14,5 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+    // nyoba error
+    // throw new Error("Something went wrong");
     return <main className="flex min-h-screen flex-col items-center justify-between p-24">Hello World!</main>;
 }
