@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"),
     title: "Home | Next App",
     description: "Some description",
     authors: [{ name: "Kevin Maulana", url: "https://github.com/kevinmaulanaatmaja" }],

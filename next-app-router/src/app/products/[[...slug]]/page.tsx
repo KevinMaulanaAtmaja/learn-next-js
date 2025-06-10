@@ -1,11 +1,17 @@
-import { getData } from "@/services/products";
+"use client";
+import useSWR from "swr";
+import { fetcher } from "@/lib/swr/fetcher";
+
+// import { getData } from "@/services/products";
 import Image from "next/image";
 
 type ProductPageProps = { params: { slug: string[] } };
 
-export default async function ProductPage(props: ProductPageProps) {
+export default function ProductPage(props: ProductPageProps) {
     const { params } = props;
-    const products = await getData("https://fakestoreapi.com/products");
+    // const products = await getData("https://fakestoreapi.com/products");
+    const { data } = useSWR(`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products`, fetcher);
+    const products = data;
 
     return (
         <>
@@ -14,8 +20,8 @@ export default async function ProductPage(props: ProductPageProps) {
             <div className="grid grid-cols-3 mt-5 place-items-center">
                 {/* {products.data.length > 0 &&
                     products.data.map((product: any) => ( */}
-                {products.length > 0 &&
-                    products.map((product: any) => (
+                {products?.length > 0 &&
+                    products?.map((product: any) => (
                         <div
                             key={product.id}
                             className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 my-5"
